@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../styles/BookingPopup.css';
 import { X } from 'lucide-react';
 
-const BookingPopup = ({ onClose, onBookingSuccess }) => {
+const BookingPopup = ({ onClose }) => {
   const [formData, setFormData] = useState({
     telegramNick: '',
     preferredDate: '',
@@ -14,31 +14,33 @@ const BookingPopup = ({ onClose, onBookingSuccess }) => {
     e.preventDefault();
     console.log('Booking submitted:', formData);
 
+    // Send booking data to Telegram bot
+    const botToken = 'YOUR_BOT_TOKEN';
+    const chatId = 'YOUR_CHAT_ID';
+    const text = `booking_${formData.telegramNick}_${formData.preferredDate}_${formData.preferredTime}`;
+
     try {
-      const response = await fetch('http://your-backend-url:5002/book', {
+      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          chat_id: 'YOUR_CHAT_ID', // Replace with actual chat ID or method to get it
-          ...formData
+          chat_id: chatId,
+          text: text,
         }),
       });
 
-      const data = await response.json();
-
-      if (data.success) {
-        onBookingSuccess();
-        onClose();
+      if (response.ok) {
+        console.log('Booking data sent to Telegram bot');
       } else {
-        console.error('Booking failed:', data.message);
-        // Handle error (e.g., show error message to user)
+        console.error('Failed to send booking data to Telegram bot');
       }
     } catch (error) {
-      console.error('Error sending booking data:', error);
-      // Handle error (e.g., show error message to user)
+      console.error('Error sending booking data to Telegram bot:', error);
     }
+
+    onClose();
   };
 
   const handleChange = (e) => {
