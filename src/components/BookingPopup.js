@@ -14,30 +14,25 @@ const BookingPopup = ({ onClose }) => {
     e.preventDefault();
     console.log('Booking submitted:', formData);
 
-    // Send booking data to Telegram bot
-    const botToken = process.env.REACT_YOUR_BOT_TOKEN;
-    const chatId = process.env.REACT_YOUR_CHAT_ID;
-    const text = `booking_${formData.telegramNick}_${formData.preferredDate}_${formData.preferredTime}`;
+    const tg = window.Telegram.WebApp;
 
     try {
-      const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+      const response = await fetch('https://6289-2a03-d000-84a9-9463-4988-73df-ff15-11b4.ngrok-free.app/book', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          chat_id: chatId,
-          text: text,
-        }),
+        body: JSON.stringify(formData),
       });
 
       if (response.ok) {
-        console.log('Booking data sent to Telegram bot');
+        console.log('Booking data sent to backend');
+        tg.sendData(JSON.stringify(formData));
       } else {
-        console.error('Failed to send booking data to Telegram bot');
+        console.error('Failed to send booking data to backend');
       }
     } catch (error) {
-      console.error('Error sending booking data to Telegram bot:', error);
+      console.error('Error sending booking data:', error);
     }
 
     onClose();
