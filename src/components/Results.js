@@ -11,7 +11,7 @@ const Results = ({ userAnswers, quizData, onRetake, onBookLesson }) => {
     <div className="results-container">
       <h2>Результаты теста</h2>
       <div className="results-image-container">
-        <img src="/placeholder.svg?height=200&width=200" alt="Results illustration" className="results-image" />
+        <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Results illustration" className="results-image" />
       </div>
       <p>Вы ответили правильно на {correctAnswers} из {quizData.length} вопросов!</p>
       <div className="action-buttons">

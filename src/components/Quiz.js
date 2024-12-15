@@ -51,7 +51,7 @@ const Quiz = () => {
           <h1>Тест на знание английского языка</h1>
           <h2>Пройдите тест и получите бесплатный урок с нашим преподавателем!</h2>
           <div className="illustration">
-            <img src="/placeholder.svg?height=300&width=300" alt="Quiz illustration" className="quiz-image" />
+            <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80" alt="English learning illustration" className="quiz-image" />
             <Sparkles className="sparkle-1" />
             <Star className="star-1" />
             <Star className="star-2" />
