@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import '../styles/BookingPopup.css';
 import { X } from 'lucide-react';
 
-const BookingPopup = ({ onClose }) => {
+const BookingPopup = ({ onClose, onBookingSuccess }) => {
   const [formData, setFormData] = useState({
     telegramNick: '',
     preferredDate: '',
@@ -10,11 +10,35 @@ const BookingPopup = ({ onClose }) => {
     phone: '',
   });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Here you would typically send the form data to your backend
     console.log('Booking submitted:', formData);
-    onClose();
+
+    try {
+      const response = await fetch('http://your-backend-url:5002/book', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: 'YOUR_CHAT_ID', // Replace with actual chat ID or method to get it
+          ...formData
+        }),
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        onBookingSuccess();
+        onClose();
+      } else {
+        console.error('Booking failed:', data.message);
+        // Handle error (e.g., show error message to user)
+      }
+    } catch (error) {
+      console.error('Error sending booking data:', error);
+      // Handle error (e.g., show error message to user)
+    }
   };
 
   const handleChange = (e) => {

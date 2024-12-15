@@ -12,6 +12,7 @@ const Quiz = () => {
   const [quizStarted, setQuizStarted] = useState(false);
   const [quizFinished, setQuizFinished] = useState(false);
   const [showBookingPopup, setShowBookingPopup] = useState(false);
+  const [bookingSuccess, setBookingSuccess] = useState(false);
 
   const handleStartQuiz = () => {
     setQuizStarted(true);
@@ -42,6 +43,11 @@ const Quiz = () => {
     setUserAnswers(Array(quizData.length).fill([]));
     setQuizFinished(false);
     setQuizStarted(false);
+    setBookingSuccess(false);
+  };
+
+  const handleBookingSuccess = () => {
+    setBookingSuccess(true);
   };
 
   if (!quizStarted) {
@@ -74,7 +80,15 @@ const Quiz = () => {
           onBookLesson={() => setShowBookingPopup(true)}
         />
         {showBookingPopup && (
-          <BookingPopup onClose={() => setShowBookingPopup(false)} />
+          <BookingPopup 
+            onClose={() => setShowBookingPopup(false)}
+            onBookingSuccess={handleBookingSuccess}
+          />
+        )}
+        {bookingSuccess && (
+          <div className="booking-success-message">
+            Вы успешно забронировали урок!
+          </div>
         )}
       </>
     );
