@@ -15,8 +15,8 @@ const BookingPopup = ({ onClose }) => {
     console.log('Booking submitted:', formData);
 
     // Send booking data to Telegram bot
-    const botToken = 'YOUR_BOT_TOKEN';
-    const chatId = 'YOUR_CHAT_ID';
+    const botToken = process.env.REACT_YOUR_BOT_TOKEN;
+    const chatId = process.env.REACT_YOUR_CHAT_ID;
     const text = `booking_${formData.telegramNick}_${formData.preferredDate}_${formData.preferredTime}`;
 
     try {
