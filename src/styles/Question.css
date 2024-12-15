@@ -1,34 +1,39 @@
 .question-container {
-    margin-bottom: 20px;
-  }
-  
-  .answers-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-  }
-  
-  .answer {
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .answer:hover {
-    background-color: #e0e0e0;
-  }
-  
-  .answer.selected {
-    background-color: #b3d9ff;
-  }
-  
-  .answer img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-    margin-bottom: 10px;
-  }
-  
-  
+  margin-bottom: 20px;
+}
+
+.answers-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.answer {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  text-align: center;
+}
+
+.answer:hover {
+  background-color: #e0e0e0;
+}
+
+.answer.selected {
+  background-color: #b3d9ff;
+}
+
+.answer-gif {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.answer p {
+  margin: 0;
+}
+

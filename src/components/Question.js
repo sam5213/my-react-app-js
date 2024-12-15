@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/Question.css';
 
 const Question = ({ questionData, onAnswer, userAnswers }) => {
-  const { question, answers, correctAnswers, multipleChoice } = questionData;
+  const { question, answers, multipleChoice } = questionData;
 
   const handleAnswerClick = (index) => {
     if (multipleChoice) {
@@ -25,7 +25,7 @@ const Question = ({ questionData, onAnswer, userAnswers }) => {
             className={`answer ${userAnswers.includes(index) ? 'selected' : ''}`}
             onClick={() => handleAnswerClick(index)}
           >
-            <img src={answer.gif} alt={answer.text} />
+            <img src={answer.gif} alt={answer.text} className="answer-gif" />
             <p>{answer.text}</p>
           </div>
         ))}
