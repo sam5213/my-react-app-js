@@ -12,9 +12,14 @@ const BookingPopup = ({ onClose }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Booking submitted:', formData);
-
+    
     const tg = window.Telegram.WebApp;
+    
+    // Include Telegram chat ID in the form data
+    const bookingData = {
+      ...formData,
+      chatId: tg.initDataUnsafe?.user?.id || tg.initData?.user?.id,
+    };
 
     try {
       const response = await fetch('https://6289-2a03-d000-84a9-9463-4988-73df-ff15-11b4.ngrok-free.app/book', {
@@ -22,17 +27,22 @@ const BookingPopup = ({ onClose }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(bookingData),
       });
 
       if (response.ok) {
         console.log('Booking data sent to backend');
-        tg.sendData(JSON.stringify(formData));
+        // Send data back to Telegram WebApp
+        tg.sendData(JSON.stringify(bookingData));
+        // Close the WebApp
+        tg.close();
       } else {
         console.error('Failed to send booking data to backend');
+        alert('Произошла ошибка при бронировании. Пожалуйста, попробуйте снова.');
       }
     } catch (error) {
       console.error('Error sending booking data:', error);
+      alert('Произошла ошибка при бронировании. Пожалуйста, попробуйте снова.');
     }
 
     onClose();
